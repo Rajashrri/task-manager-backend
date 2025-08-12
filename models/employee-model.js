@@ -5,7 +5,8 @@ const jwt = require("jsonwebtoken");
 const employeeSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
-  role: { type: String, required: true },
+  role_name: { type: String, required: true },
+  role_id: { type: String, required: true },
   password: { type: String, required: true },
   phone: { type: String },
   emp_id: { type: String },
