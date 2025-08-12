@@ -26,7 +26,7 @@ const errorMiddleware1 = require("./middlewares/error-middleware");
 
 // ✅ CORS Configuration
 const corsOptions = {
-  origin: ["https://task-manager-frontend-three-black.vercel.app"],
+  origin: "https://task-manager-frontend-three-black.vercel.app",
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
