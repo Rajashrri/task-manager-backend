@@ -26,7 +26,7 @@ const errorMiddleware1 = require("./middlewares/error-middleware");
 
 // ✅ CORS Configuration
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
+  origin: process.env.CORS_ORIGIN, // only from .env
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
