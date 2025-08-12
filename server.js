@@ -26,7 +26,7 @@ const errorMiddleware1 = require("./middlewares/error-middleware");
 
 // ✅ CORS Configuration
 const corsOptions = {
-  origin: "'http://localhost:3000",
+  origin: "http://localhost:3000",
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
