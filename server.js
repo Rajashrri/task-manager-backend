@@ -26,10 +26,12 @@ const errorMiddleware1 = require("./middlewares/error-middleware");
 
 // ✅ CORS Configuration
 const corsOptions = {
-  origin: "'http://localhost:3000",
+  origin: "https://task-manager-frontend-gules-phi.vercel.app",
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
+
+
 app.use(cors(corsOptions));
 
 // ✅ Parse JSON
