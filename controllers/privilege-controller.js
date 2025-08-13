@@ -19,6 +19,25 @@ const getPriByid = async (req, res) => {
       .json({ error: "Internal Server Error", details: error.msg });
   }
 };
+
+
+const getprivileges = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const response = await Privilege.find({ role_id: id });
+    if (!response) {
+      res.status(404).json({ msg: "No Data Found" });
+      return;
+    }
+    res.status(200).json({ msg: response });
+  } catch (error) {
+    console.error("Error in getdata:", error);
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error.msg });
+  }
+};
+
 const setprivileges = async (req, res) => {
   const { id } = req.params;
   const privilegesArray = req.body;
@@ -64,4 +83,4 @@ const setprivileges = async (req, res) => {
 
 
 
-module.exports = { setprivileges,getPriByid};
+module.exports = { setprivileges,getPriByid,getprivileges};
