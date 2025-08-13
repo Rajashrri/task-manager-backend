@@ -62,9 +62,9 @@ const formatDateDMY = (date) => {
 const addemployee = async (req, res) => {
   try {
     console.log(req.body);
-    const { emp_id,name, email, role_name,role_id,createdBy } = req.body;
+    const { emp_id, name, email, role_name, role_id, createdBy } = req.body;
     const status = "1";
-     const password = "Admin@123";
+    const password = "Admin@123";
     const url = createCleanUrl(req.body.name);
     const userExist = await Employee.findOne({ email });
     const now = new Date(); // ✅ Define now
@@ -86,7 +86,6 @@ const addemployee = async (req, res) => {
       status,
       url,
       password,
-      
     });
     res.status(201).json({
       msg: cmCreated,
@@ -130,7 +129,7 @@ const updateemployee = async (req, res) => {
     const now = new Date(); // ✅ Define now
     const createdAt = formatDateDMY(now); // 👈 formatted date
     const updatedAt = formatDateDMY(now);
-    const { emp_id,name, email, role_name,role_id } = req.body;
+    const { emp_id, name, email, role_name, role_id } = req.body;
     const url = createCleanUrl(req.body.name);
     const id = req.params.id;
     const userExist = await Employee.findOne({ email, _id: { $ne: id } });
@@ -142,14 +141,14 @@ const updateemployee = async (req, res) => {
       { _id: id },
       {
         $set: {
-          emp_id:emp_id,
+          emp_id: emp_id,
           name: name,
           email: email,
-             role_name: role_name,
-               role_id: role_id,
-         
+          role_name: role_name,
+          role_id: role_id,
+
           url: url,
-         
+
           createdAt: createdAt,
         },
       },
@@ -216,7 +215,6 @@ const getemployeeByid = async (req, res) => {
       .json({ msg: "Internal Server Error", error: error.message });
   }
 };
-
 
 const generateEmployeeCode = async (req, res) => {
   try {

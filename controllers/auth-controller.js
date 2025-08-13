@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const speakeasy = require("speakeasy");
@@ -26,7 +26,7 @@ const register = async (req, res) => {
       email,
       phone,
       password,
-      role: 'user', // default role if needed
+      role: "user", // default role if needed
     });
 
     res.status(201).json({
@@ -34,7 +34,6 @@ const register = async (req, res) => {
       token: await userCreated.generateToken(),
       userId: userCreated._id.toString(),
     });
-
   } catch (error) {
     res.status(500).json(error);
   }
@@ -63,7 +62,8 @@ const login = async (req, res) => {
       email,
       user: {
         id: userExist._id,
-        role: userExist.role,
+        role_name: userExist.role_name,
+        role_id: userExist.role_id,
         email: userExist.email,
       },
     });
@@ -88,18 +88,17 @@ const authverify = async (req, res) => {
 
     const validated = speakeasy.totp.verify({
       secret: userExist.authkey, // using authkey as base32
-      encoding: 'base32',
+      encoding: "base32",
       token: otp,
       window: 1,
     });
 
     const token = await userExist.generateToken();
     if (!validated) {
-      res.status(200).json({ msg: 'Invalid OTP' });
+      res.status(200).json({ msg: "Invalid OTP" });
     } else {
       res.status(200).json({ msg: validated, token });
     }
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error", error });
@@ -117,12 +116,15 @@ const resendverify = async (req, res) => {
 
     if (userExist.loginotpcount != 4) {
       const rand = Math.floor(100000 + Math.random() * 900000);
-      await Employee.updateOne({ email }, {
-        $set: {
-          otp: rand,
-          loginotpcount: (userExist.loginotpcount || 0) + 1,
+      await Employee.updateOne(
+        { email },
+        {
+          $set: {
+            otp: rand,
+            loginotpcount: (userExist.loginotpcount || 0) + 1,
+          },
         }
-      });
+      );
 
       res.status(200).json({
         msg: "OTP Sent Successfully",
@@ -131,7 +133,6 @@ const resendverify = async (req, res) => {
     } else {
       res.status(401).json({ message: "Limit exceeded. Try after some time" });
     }
-
   } catch (error) {
     res.status(500).json(error);
   }
@@ -141,13 +142,13 @@ const logout = async (req, res) => {
   try {
     res.status(200).json({
       success: true,
-      message: "User logged out successfully"
+      message: "User logged out successfully",
     });
   } catch (error) {
     res.status(500).json({
       success: false,
       message: "Logout failed",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -192,7 +193,9 @@ const forgot = async (req, res) => {
     });
   } catch (error) {
     console.error("Error in forgot password function:", error);
-    res.status(500).json({ message: "An error occurred while processing the request." });
+    res
+      .status(500)
+      .json({ message: "An error occurred while processing the request." });
   }
 };
 
@@ -206,21 +209,25 @@ const resetpassword = async (req, res) => {
     }
 
     if (password !== cpassword) {
-      return res.status(401).json({ message: "Password and Confirm password do not match" });
+      return res
+        .status(401)
+        .json({ message: "Password and Confirm password do not match" });
     }
 
     const saltRound = 10;
     const hash_password = await bcrypt.hash(cpassword, saltRound);
 
-    await Employee.updateOne({ email }, {
-      $set: { password: hash_password }
-    });
+    await Employee.updateOne(
+      { email },
+      {
+        $set: { password: hash_password },
+      }
+    );
 
     res.status(200).json({
       msg: "Password Changed Successfully",
       userId: userExist._id.toString(),
     });
-
   } catch (error) {
     res.status(500).json(error);
   }
@@ -267,5 +274,5 @@ module.exports = {
   forgot,
   resetpassword,
   verifyResetToken,
-  logout
+  logout,
 };
