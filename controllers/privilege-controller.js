@@ -1,6 +1,6 @@
 const Privilege = require("../models/privilege-model");
-const mongoose = require('mongoose');
-const {Schema, model} = require("mongoose");
+const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const getPriByid = async (req, res) => {
@@ -19,7 +19,6 @@ const getPriByid = async (req, res) => {
       .json({ error: "Internal Server Error", details: error.msg });
   }
 };
-
 
 const getprivileges = async (req, res) => {
   const id = req.params.id;
@@ -65,6 +64,7 @@ const setprivileges = async (req, res) => {
         privilegeObject[`${prefix}update`] = item.edit === "Active" ? "1" : "0";
         privilegeObject[`${prefix}delete`] = item.delete === "Active" ? "1" : "0";
         privilegeObject[`${prefix}list`] = item.list === "Active" ? "1" : "0";
+        privilegeObject[`${prefix}view`] = item.view === "Active" ? "1" : "0";
       }
     });
 
@@ -81,6 +81,4 @@ const setprivileges = async (req, res) => {
   }
 };
 
-
-
-module.exports = { setprivileges,getPriByid,getprivileges};
+module.exports = { setprivileges, getPriByid, getprivileges };

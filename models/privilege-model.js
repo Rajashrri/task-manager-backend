@@ -23,6 +23,7 @@ const privilegeSchema = new Schema({
   taskupdate: { type: String },
   taskdelete: { type: String },
   tasklist: { type: String },
+    taskview: { type: String },
 });
 
 module.exports = model("Privilege", privilegeSchema);
