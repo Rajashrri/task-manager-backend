@@ -25,13 +25,23 @@ const errorMiddleware = require("./middlewares/validate-middleware");
 const errorMiddleware1 = require("./middlewares/error-middleware");
 
 // ✅ CORS Configuration
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN, // only from .env
-  methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
-  credentials: true,
-};
 
-app.use(cors(corsOptions));
+
+const corsoptions = {
+	origin:['https://brw-frontend-git-master-rajashri-chougules-projects.vercel.app','http://localhost:3001','https://comingsoon.digihostinfra.com','https://theme.digihostinfra.com','https://admin.digihostinfra.com'  ,
+		'https://creator-club.digihostinfra.com/'], 
+    methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+    credentials:true  
+}; 
+app.use(cors(corsoptions)); 
+app.options('*', cors(corsoptions));
+// const corsOptions = {
+//   origin: process.env.CORS_ORIGIN, // only from .env
+//   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+//   credentials: true,
+// };
+
+// app.use(cors(corsOptions));
 
 // ✅ Parse JSON
 app.use(express.json());
