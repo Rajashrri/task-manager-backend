@@ -32,8 +32,11 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
 };
-app.use(cors(corsoptions)); 
-app.options('*', cors(corsoptions));
+
+// Use the same variable name (case sensitive!)
+app.use(cors(corsOptions)); 
+app.options('*', cors(corsOptions));
+
 // const corsOptions = {
 //   origin: process.env.CORS_ORIGIN, // only from .env
 //   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
