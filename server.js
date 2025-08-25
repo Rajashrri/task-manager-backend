@@ -28,8 +28,7 @@ const errorMiddleware1 = require("./middlewares/error-middleware");
 
 
 const corsoptions = {
-	origin:['https://brw-frontend-git-master-rajashri-chougules-projects.vercel.app','http://localhost:3001','https://comingsoon.digihostinfra.com','https://theme.digihostinfra.com','https://admin.digihostinfra.com'  ,
-		'https://creator-club.digihostinfra.com/'], 
+	origin:['https://brw-frontend-git-master-rajashri-chougules-projects.vercel.app'], 
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials:true  
 }; 
