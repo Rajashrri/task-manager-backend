@@ -27,11 +27,11 @@ const errorMiddleware1 = require("./middlewares/error-middleware");
 // ✅ CORS Configuration
 
 
-const corsoptions = {
-	origin:['https://brw-frontend-git-master-rajashri-chougules-projects.vercel.app'], 
-    methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
-    credentials:true  
-}; 
+const corsOptions = {
+  origin: 'https://brw-frontend-git-master-rajashri-chougules-projects.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  credentials: true,
+};
 app.use(cors(corsoptions)); 
 app.options('*', cors(corsoptions));
 // const corsOptions = {
