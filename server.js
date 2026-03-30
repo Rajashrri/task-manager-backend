@@ -28,7 +28,7 @@ const errorMiddleware1 = require("./middlewares/error-middleware");
 
 
 const corsOptions = {
-  origin: 'https://brw-frontend-git-master-rajashri-chougules-projects.vercel.app',
+  origin: 'https://task-manager-frontend-one-phi.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
 };
